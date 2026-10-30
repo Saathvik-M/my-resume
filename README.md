@@ -66,8 +66,8 @@ O_RESUME/
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/saathvik999/O_RESUME.git
-   cd O_RESUME
+   git clone https://github.com/Saathvik-M/my-resume.git
+   cd my-resume
    ```
 
 2. **Install dependencies:**
@@ -117,12 +117,12 @@ This project includes a GitHub Actions workflow that automatically deploys to Gi
 
 **Setup steps:**
 
-1. Push this project to a GitHub repository named `O_RESUME`.
+1. Push this project to the `my-resume` GitHub repository.
 2. Go to **Settings → Pages** in your repository.
 3. Under **Source**, select **GitHub Actions**.
 4. Push a commit to the `main` branch — the site will deploy automatically.
 
-Your site will be live at: `https://saathvik999.github.io/O_RESUME/`
+Your site will be live at: `https://saathvik-m.github.io/my-resume/`
 
 ### Manual Deployment
 

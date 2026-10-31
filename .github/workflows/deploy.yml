@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: 'pages'
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -48,6 +48,25 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Check that this run is still current
+        id: current
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const branchName = context.ref.replace(/^refs\/heads\//, '');
+            const { data: branch } = await github.rest.repos.getBranch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              branch: branchName,
+            });
+
+            const isCurrent = branch.commit.sha === context.sha;
+            if (!isCurrent) {
+              core.notice(`Skipping stale deployment ${context.sha}; ${branch.commit.sha} is current on ${branchName}.`);
+            }
+            core.setOutput('is_current', String(isCurrent));
+
       - name: Deploy to GitHub Pages
         id: deployment
+        if: steps.current.outputs.is_current == 'true'
         uses: actions/deploy-pages@v4
